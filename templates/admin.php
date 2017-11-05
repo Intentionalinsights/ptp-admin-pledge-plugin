@@ -144,7 +144,7 @@ class Pledgers_List_Table extends WP_List_Table {
 	  $delete_nonce = wp_create_nonce( 'sp_delete_pledge' );
 
 	  $actions = [
-	  	'edit' => sprintf( '<a href="?page=%s&action=%s&pledgers_edit=%s">Edit</a>', esc_attr( $_REQUEST['page'] ), 'edit', absint( $item['pledgeId'] ) ),
+	  	'edit' => sprintf( '<a href="?page=%s&action=%s&pledgers_edit=%s">Edit</a>', 'ptp_edit_pledge', 'edit', absint( $item['pledgeId'] ) ),
 	    'delete' => sprintf( '<a href="?page=%s&action=%s&pledgers_delete=%s&_wpnonce=%s">Delete</a>', esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['pledgeId'] ), $delete_nonce )
 	  ];
 
@@ -268,6 +268,7 @@ class Pledgers_List_Table extends WP_List_Table {
 
 
 	  $this->items = self::get_pledgers( $per_page, $current_page );
+	  //echo print_r($this->items);
 	}
 
 	function handle_custom_action() {

@@ -29,9 +29,13 @@ if ( !class_exists( 'PTPAdminPledgePlugin' ) ) {
 		}
 		public function add_admin_pages() {
 			add_menu_page( 'PTP Manage', 'PTP Manage', 'manage_options', 'ptp_admin_pledge', array( $this, 'admin_index' ), 'dashicons-store', 110 );
+			add_submenu_page( 'ptp_admin_pledge', 'Edit pledge', 'Edit Pledge', 'manage_options', 'ptp_edit_pledge', array ($this, 'admin_edit'));
 		}
 		public function admin_index() {
 			require_once plugin_dir_path( __FILE__ ) . 'templates/admin.php';
+		}
+		public function admin_edit() {
+			require_once plugin_dir_path( __FILE__ ) . 'templates/edit_pledge.php';
 		}
 		function enqueue() {
 			// enqueue all our scripts
