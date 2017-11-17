@@ -1,9 +1,9 @@
 table.fixed {
-	table-layout: auto;
+    table-layout: auto;
 }
 
 .wrap {
-	padding: 10px;
+    padding: 10px;
     background: #fff;
 }
 
