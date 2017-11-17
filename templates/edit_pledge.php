@@ -225,7 +225,7 @@ if(isset($_POST['SubmitButton'])){ //check if form was submitted
                 <label>Are you?</label>
                 <div class="form-check form-check-inline">
                   <label class="form-check-label" style="display: inline;">
-                    <input class="form-check-input" type="radio" name="category" value="Citizen" <?php echo ($pledger_data->category == 'Citizen'? htmlspecialchars(checked): ''); ?> />Citizen
+                    <input class="form-check-input" type="radio" name="category" value="Public" <?php echo ($pledger_data->category == 'Public'? htmlspecialchars(checked): ''); ?> />General Public
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
