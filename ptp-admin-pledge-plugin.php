@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Pro-Truth Pledge Admin Management Page
 * Description: Manages the Pro Truth Pledge form data
-* Version: 1.0
+* Version: 1.2
 * Author: Pro-Truth Pledge developers
 * Author URI: protruthpledge.org
 */
