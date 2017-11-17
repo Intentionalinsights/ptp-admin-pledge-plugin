@@ -34,7 +34,7 @@ class Pledgers_List_Table extends WP_List_Table {
      *
      * @return mixed
      */
-    public static function get_pledgers( $per_page = 5, $page_number = 1 ) {
+    public static function get_pledgers( $per_page = 100, $page_number = 1 ) {
       global $wpdb;
 
       $sql = "SELECT * FROM {$wpdb->prefix}ptp_pledges";
