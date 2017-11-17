@@ -12,7 +12,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 
 class Pledgers_List_Table extends WP_List_Table {
 
-    private $NUMBER_OF_RECORDS_DEFAULT = 10;
+    private $NUMBER_OF_RECORDS_DEFAULT = 100;
 
     /** Class constructor */
     public function __construct() {
