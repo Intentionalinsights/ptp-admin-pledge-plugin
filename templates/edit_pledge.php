@@ -10,6 +10,7 @@ class PTPPledges {
 
     public $pledgeId;
     public $key;
+    public $show;
     public $category;
     public $step;
     public $fName;
@@ -46,6 +47,7 @@ class PTPPledges {
         
         $this->pledgeId = $result['pledgeId'];
         $this->key = $result['key'];
+        $this->show = $result['show'];
         $this->category = $result['category'];
         $this->fName = $result['fName'];
         $this->lName = $result['lName'];
@@ -99,6 +101,7 @@ class PTPPledges {
         'lName' => strip_tags($_POST["lName"], ""),
         'email' => strip_tags($_POST["email"], ""),
 
+        'show' => isset($_POST['show']),
         'volunteer' => isset($_POST['volunteer']),
         'directory' => isset($_POST['directory']),
         'emailList' => isset($_POST['emailList']),
@@ -179,6 +182,15 @@ if(isset($_POST['SubmitButton'])){ //check if form was submitted
                 />
             </div>
         </div>
+
+            <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" style="display: inline;">
+                        <input class="form-check-input" type="checkbox" name="volunteer" value="volunteer" <?php echo ($pledger_data->show == 1? htmlspecialchars(checked): ''); ?> />
+                        Show this record to the public.
+                    </label>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label for="email">Email (will be kept private) </label>

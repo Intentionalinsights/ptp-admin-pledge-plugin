@@ -175,6 +175,7 @@ class Pledgers_List_Table extends WP_List_Table {
         $columns = array(
             //'cb'        => '<input type="checkbox" />', //* Disabled:  BULK ITEMS MANAGEMENT FOR THE FUTURE
             'pledgeId' => 'PledgeId',
+            'show' => 'Show',
             'category' => 'Category',
             'step' => 'Step',
             'fName' => 'FName',
