@@ -186,7 +186,7 @@ if(isset($_POST['SubmitButton'])){ //check if form was submitted
             <div class="form-group">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label" style="display: inline;">
-                        <input class="form-check-input" type="checkbox" name="volunteer" value="volunteer" <?php echo ($pledger_data->show == 1? htmlspecialchars(checked): ''); ?> />
+                        <input class="form-check-input" type="checkbox" name="show" value="show" <?php echo ($pledger_data->show == 1? htmlspecialchars(checked): ''); ?> />
                         Show this record to the public.
                     </label>
                 </div>
