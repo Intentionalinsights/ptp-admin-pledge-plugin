@@ -183,130 +183,135 @@ if(isset($_POST['SubmitButton'])){ //check if form was submitted
             </div>
         </div>
 
-            <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" style="display: inline;">
-                        <input class="form-check-input" type="checkbox" name="show" value="show" <?php echo ($pledger_data->show == 1? htmlspecialchars(checked): ''); ?> />
-                        Show this record to the public.
-                    </label>
-                </div>
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" style="display: inline;">
+                    <input class="form-check-input" type="checkbox" name="show" value="show" <?php echo ($pledger_data->show == 1? htmlspecialchars(checked): ''); ?> />
+                    Show this record to the public.
+                </label>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="email">Email (will be kept private) </label>
-                <input type="email" name="email" id="email" class="form-control" required autocomplete="email"
-                value="<?php echo htmlspecialchars($pledger_data->email); ?>" 
-                />
+        <div class="form-group">
+            <label for="email">Email (will be kept private) </label>
+            <input type="email" name="email" id="email" class="form-control" required autocomplete="email"
+            value="<?php echo htmlspecialchars($pledger_data->email); ?>" 
+            />
+        </div>
+        
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" style="display: inline;">
+                    <input class="form-check-input" type="checkbox" name="directory" value="directory" <?php echo ($pledger_data->directory == 1? htmlspecialchars(checked): ''); ?> />
+                    I want to be in the public directory of signers
+                </label> (We will only post your name and social media links you provide)
             </div>
-            
-            <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" style="display: inline;">
-                        <input class="form-check-input" type="checkbox" name="directory" value="directory" <?php echo ($pledger_data->directory == 1? htmlspecialchars(checked): ''); ?> />
-                        I want to be in the public directory of signers
-                    </label> (We will only post your name and social media links you provide)
-                </div>
-            </div>  
-            
-            <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" style="display: inline;">
-                        <input class="form-check-input" type="checkbox" name="volunteer" value="volunteer" <?php echo ($pledger_data->volunteer == 1? htmlspecialchars(checked): ''); ?> />
-                        I want to help with the Pro-Truth Pledge
-                    </label>
-                </div>
+        </div>  
+        
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" style="display: inline;">
+                    <input class="form-check-input" type="checkbox" name="volunteer" value="volunteer" <?php echo ($pledger_data->volunteer == 1? htmlspecialchars(checked): ''); ?> />
+                    I want to help with the Pro-Truth Pledge
+                </label>
             </div>
-            
-            <div class="form-group">
-                <label>Notifications</label>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label" style="display: inline;">
-                    <input class="form-check-input" type="checkbox" name="emailList" value="emailList" <?php echo ($pledger_data->emailList == 1? htmlspecialchars(checked): ''); ?> /> Infrequent Email Updates
-                    </label>
-                    (important to motivate public figures to sign the pledge)
-                </div>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label"  style="display: inline;">
-                    <input class="form-check-input" type="checkbox" name="emailAlerts" value="emailAlerts" <?php echo ($pledger_data->emailAlerts == 1? htmlspecialchars(checked): ''); ?> /> Email Action Alerts
-                  </label>(
-                  important to ensure we can hold public figures accountable)
-                </div>
+        </div>
+        
+        <div class="form-group">
+            <label>Notifications</label>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" style="display: inline;">
+                <input class="form-check-input" type="checkbox" name="emailList" value="emailList" <?php echo ($pledger_data->emailList == 1? htmlspecialchars(checked): ''); ?> /> Infrequent Email Updates
+                </label>
+                (important to motivate public figures to sign the pledge)
             </div>
-            
-            <div class="form-group">
-                <label>Are you?</label>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label" style="display: inline;">
-                    <input class="form-check-input" type="radio" name="category" value="Public" <?php echo ($pledger_data->category == 'Public'? htmlspecialchars(checked): ''); ?> />General Public
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label" style="display: inline;">
-                    <input class="form-check-input" type="radio" name="category" value="Figure" <?php echo ($pledger_data->category == 'Figure'? htmlspecialchars(checked): ''); ?> /> Public Figure
-                    </label>
-                    or staff
-                </div>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label"  style="display: inline;">
-                    <input class="form-check-input" type="radio" name="category" value="Official" <?php echo ($pledger_data->category == 'Official'? htmlspecialchars(checked): ''); ?> /> Elected or Appointed Official or Candidate
-                  </label>
-                  or staff
-                </div>          
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label"  style="display: inline;">
-                    <input class="form-check-input" type="radio" name="category" value="Group" <?php echo ($pledger_data->category == 'Group'? htmlspecialchars(checked): ''); ?> /> Organization or Group
-                  </label>
-                </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label"  style="display: inline;">
+                <input class="form-check-input" type="checkbox" name="emailAlerts" value="emailAlerts" <?php echo ($pledger_data->emailAlerts == 1? htmlspecialchars(checked): ''); ?> /> Email Action Alerts
+                </label>(
+                important to ensure we can hold public figures accountable)
             </div>
+        </div>
+        
+        <div class="form-group">
+            <label>Are you?</label>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" style="display: inline;">
+                <input class="form-check-input" type="radio" name="category" value="Public" <?php echo ($pledger_data->category == 'Public'? htmlspecialchars(checked): ''); ?> />General Public
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" style="display: inline;">
+                <input class="form-check-input" type="radio" name="category" value="Figure" <?php echo ($pledger_data->category == 'Figure'? htmlspecialchars(checked): ''); ?> /> Public Figure
+                </label>
+                or staff
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label"  style="display: inline;">
+                <input class="form-check-input" type="radio" name="category" value="Official" <?php echo ($pledger_data->category == 'Official'? htmlspecialchars(checked): ''); ?> /> Elected or Appointed Official or Candidate
+                </label>
+                or staff
+            </div>          
+            <div class="form-check form-check-inline">
+                <label class="form-check-label"  style="display: inline;">
+                <input class="form-check-input" type="radio" name="category" value="Group" <?php echo ($pledger_data->category == 'Group'? htmlspecialchars(checked): ''); ?> /> Organization or Group
+                </label>
+            </div>
+        </div>
 
-            <div class="form-group">
-                <textarea name="description" id="description" placeholder="I signed the pledge because..." class="form-control"><?php echo $pledger_data->description; ?></textarea>
+        <div class="form-group">
+            <textarea name="description" id="description" placeholder="I signed the pledge because..." class="form-control"><?php echo $pledger_data->description; ?></textarea>
+        </div>
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" style="display: inline;">
+                    <input class="form-check-input" type="checkbox" name="repNudge" value="repNudge" <?php echo ($pledger_data->repNudge == 1? htmlspecialchars(checked): ''); ?> />
+                    I call on all of my elected representatives to take the Pro-Truth Pledge
+                </label>
             </div>
-            <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" style="display: inline;">
-                        <input class="form-check-input" type="checkbox" name="repNudge" value="repNudge" <?php echo ($pledger_data->repNudge == 1? htmlspecialchars(checked): ''); ?> />
-                        I call on all of my elected representatives to take the Pro-Truth Pledge
-                    </label>
-                </div>
-            </div>  
-            <div class="form-group">
-                <label for="address1">Address</label>
-                <input name="address1"  id="address" class="form-control" value="<?php echo htmlspecialchars($pledger_data->address1); ?>" />
+        </div>  
+        <div class="form-group">
+            <label for="address1">Address</label>
+            <input name="address1"  id="address" class="form-control" value="<?php echo htmlspecialchars($pledger_data->address1); ?>" />
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="city">City</label>
+                <input name="city"  id="city" class="form-control" value="<?php echo htmlspecialchars($pledger_data->city); ?>">
             </div>
-            <div class="row">
-                <div class="form-group col-sm-6">
-                    <label for="city">City</label>
-                    <input name="city"  id="city" class="form-control" value="<?php echo htmlspecialchars($pledger_data->city); ?>">
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="region">State/ Region</label>
-                    <input name="region"  id="state" class="form-control" value="<?php echo htmlspecialchars($pledger_data->region); ?>">
-                </div>
+            <div class="form-group col-sm-6">
+                <label for="region">State/ Region</label>
+                <input name="region"  id="state" class="form-control" value="<?php echo htmlspecialchars($pledger_data->region); ?>">
             </div>
-            <div class="row">
-                <div class="form-group col-sm-6">
-                    <label for="zip">Zip/ Postal Code</label>
-                    <input name="zip"  id="zip" class="form-control" value="<?php echo htmlspecialchars($pledger_data->zip); ?>">
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="country">Country</label>
-                    <input name="country"  id="country" class="form-control" value="USA" value="<?php echo htmlspecialchars($pledger_data->country); ?>">
-                </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="zip">Zip/ Postal Code</label>
+                <input name="zip"  id="zip" class="form-control" value="<?php echo htmlspecialchars($pledger_data->zip); ?>">
             </div>
-            
-            <div class="form-group">
-                <label for="phone">Phone Number</label>will not be made public - we need it for action alerts and contacting you if you wish to help with the pledge, or if we need to clarify your information
-                <input name="phone" type="tel" id="phone" class="form-control" value="<?php echo htmlspecialchars($pledger_data->phone); ?>">
+            <div class="form-group col-sm-6">
+                <label for="country">Country</label>
+                <input name="country"  id="country" class="form-control" value="USA" value="<?php echo htmlspecialchars($pledger_data->country); ?>">
             </div>
-            <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" style="display: inline;">
-                        <input class="form-check-input" type="checkbox" name="textAlerts" value="textAlerts" <?php echo ($pledger_data->textAlerts == 1? htmlspecialchars(checked): ''); ?> />
-                        Send me text action alerts
-                    </label>
-                </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Phone Number</label>will not be made public - we need it for action alerts and contacting you if you wish to help with the pledge, or if we need to clarify your information
+            <input name="phone" type="tel" id="phone" class="form-control" value="<?php echo htmlspecialchars($pledger_data->phone); ?>">
+        </div>
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" style="display: inline;">
+                    <input class="form-check-input" type="checkbox" name="textAlerts" value="textAlerts" <?php echo ($pledger_data->textAlerts == 1? htmlspecialchars(checked): ''); ?> />
+                    Send me text action alerts
+                </label>
             </div>
+        </div>
+
+        <div class="form-group">
+            <label for="imageUrl">Image Address</label>
+            <input name="imageUrl"  id="imageUrl" class="form-control" value="<?php echo htmlspecialchars($pledger_data->imageUrl); ?>">
+        </div>
 
         <div class="row">
             <div class="form-group col-sm-6">
