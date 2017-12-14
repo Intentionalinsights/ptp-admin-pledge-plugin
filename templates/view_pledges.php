@@ -38,6 +38,16 @@ class Pledgers_List_Table extends WP_List_Table {
       global $wpdb;
 
       $sql = "SELECT * FROM {$wpdb->prefix}ptp_pledges";
+      if ( ! empty( $_REQUEST['fNameFilter']) || ! empty( $_REQUEST['lNameFilter'] )) {
+        $sql .= ' WHERE ';
+        if ( ! empty( $_REQUEST['fNameFilter'] ) ) {
+          $sql .= 'fName = "' . esc_sql( $_REQUEST['fNameFilter']) . '"';
+        }
+        if ( ! empty( $_REQUEST['lNameFilter'] ) ) {
+          if ( ! empty( $_REQUEST['fNameFilter'] ) ) {$sql .= ' AND ';}
+          $sql .= 'lName = "' . esc_sql( $_REQUEST['lNameFilter']) . '"';
+        }
+      }
       if ( ! empty( $_REQUEST['orderby'] ) ) {
         $sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] );
         $sql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' DESC';
@@ -48,7 +58,6 @@ class Pledgers_List_Table extends WP_List_Table {
       $sql .= " LIMIT $per_page";
 
       $sql .= ' OFFSET ' . ( $page_number - 1 ) * $per_page;
-
 
       $result = $wpdb->get_results( $sql, 'ARRAY_A' );
       return $result;
@@ -292,18 +301,41 @@ $pledgers_table->handle_custom_action();
 <div class="wrap">
 
     <div id="poststuff">
-        <div id="post-body" class="metabox-holder columns-2">
-            <div id="post-body-content">
-                <div class="meta-box-sortables ui-sortable">
-                    <form method="post">
-                        <?php
-                        $pledgers_table->prepare_items();
-                        $pledgers_table->display(); 
-                        ?>
-                    </form>
-                </div>
-            </div>
+
+      <form method="post">
+        <div class="row">
+              <div class="form-group col-sm-6" >
+                  <label for="fNameFilter">First Name</label>
+                  <input type="text" name="fNameFilter" id="fNameFilter" class="form-control" autocomplete="fname" 
+                  value="<?php echo htmlspecialchars($_REQUEST['fNameFilter']); ?>" 
+                  />
+              </div>
+              <div class="form-group col-sm-6" >
+                  <label for="lNameFilter">Last Name</label>
+                  <input type="text" name="lNameFilter" id="lNameFilter" class="form-control" autocomplete="lname"
+                  value="<?php echo htmlspecialchars($_REQUEST['lNameFilter']); ?>" 
+                  />
+              </div>
         </div>
-        <br class="clear">
+        <div class="row">
+              <div class="form-group col-sm-12">
+                  <input type="submit" name="SubmitButton" class="btn btn-primary" value="Search"/>
+              </div>
+          </div>
+      </form>
+
+      <div id="post-body" class="metabox-holder columns-2">
+          <div id="post-body-content">
+              <div class="meta-box-sortables ui-sortable">
+                  <form method="post">
+                      <?php
+                      $pledgers_table->prepare_items();
+                      $pledgers_table->display(); 
+                      ?>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <br class="clear">
     </div>
 </div>
