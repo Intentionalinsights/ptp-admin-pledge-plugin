@@ -67,6 +67,7 @@ class PTPPledges {
         $this->country = $result['country'];
         $this->orgs = $result['orgs'];
         $this->phone = $result['phone'];
+        $this->description = $result['description'];        
         $this->imageUrl = $result['imageUrl'];
         $this->linkText1 = $result['linkText1'];
         $this->linkUrl1 = $result['linkUrl1'];
