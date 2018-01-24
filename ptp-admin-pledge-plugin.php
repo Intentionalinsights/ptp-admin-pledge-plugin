@@ -35,6 +35,9 @@ if ( !class_exists( 'PTPAdminPledgePlugin' ) ) {
             require_once plugin_dir_path( __FILE__ ) . 'templates/edit_pledge.php';
         }
         function enqueue() {
+			
+			wp_enqueue_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' );
+			
             // enqueue all our scripts
             wp_enqueue_style( 'mypluginstyle', plugins_url( '/assets/mystyle.css', __FILE__ ) );
             wp_enqueue_script( 'mypluginscript', plugins_url( '/assets/myscript.js', __FILE__ ) );

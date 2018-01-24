@@ -100,6 +100,7 @@ class PTPPledges {
         'category' => strip_tags($_POST["category"], ""),
         'fName' => strip_tags($_POST["fName"], ""),
         'lName' => strip_tags($_POST["lName"], ""),
+        'groupName' => strip_tags($_POST["groupName"], ""),
         'email' => strip_tags($_POST["email"], ""),
 
         'show' => isset($_POST['show']),
@@ -183,13 +184,19 @@ if(isset($_POST['SubmitButton'])){ //check if form was submitted
                 />
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="form-check form-check-inline">
+		
+		<div class="row">
+            <div class="form-group col-sm-6" >
+                <label for="groupName">Group Name</label>
+                <input type="text" name="groupName" id="groupName" class="form-control" autocomplete="groupName" 
+                value="<?php echo htmlspecialchars($pledger_data->groupName); ?>" 
+                />
+            </div>
+            <div class="form-check form-check-inline col-sm-6">
                 <label class="form-check-label" style="display: inline;">
-                    <input class="form-check-input" type="checkbox" name="show" value="show" <?php echo ($pledger_data->show == 1? htmlspecialchars(checked): ''); ?> />
                     Show this record to the public.
                 </label>
+                    <input style="display:block;" class="form-check-input" type="checkbox" name="show" value="show" <?php echo ($pledger_data->show == 1? htmlspecialchars(checked): ''); ?> />
             </div>
         </div>
 
@@ -292,12 +299,12 @@ if(isset($_POST['SubmitButton'])){ //check if form was submitted
             </div>
             <div class="form-group col-sm-6">
                 <label for="country">Country</label>
-                <input name="country"  id="country" class="form-control" value="USA" value="<?php echo htmlspecialchars($pledger_data->country); ?>">
+                <input name="country"  id="country" class="form-control" value="<?php echo htmlspecialchars($pledger_data->country); ?>" value="<?php echo htmlspecialchars($pledger_data->country); ?>">
             </div>
         </div>
         
         <div class="form-group">
-            <label for="phone">Phone Number</label>will not be made public - we need it for action alerts and contacting you if you wish to help with the pledge, or if we need to clarify your information
+            <label for="phone">Phone Number</label>
             <input name="phone" type="tel" id="phone" class="form-control" value="<?php echo htmlspecialchars($pledger_data->phone); ?>">
         </div>
         <div class="form-group">
