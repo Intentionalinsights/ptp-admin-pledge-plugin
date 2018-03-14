@@ -8,6 +8,16 @@
 
 class PTPPledges
 {
+    /**
+     * @var $wpdb
+     */
+    private $wpdb;
+
+    /**
+     * @var string
+     */
+    private $pledgeTable;
+
     public $pledgeId;
     public $key;
     public $show;
@@ -43,7 +53,12 @@ class PTPPledges
 
     public function __construct($id)
     {
-        $result = $this->get_pledge($id);
+        global $wpdb;
+
+        $this->wpdb        = $wpdb;
+        $this->pledgeTable = $wpdb->prefix . 'ptp_pledges';
+
+        $result = $this->getPledgeData($id);
 
         $this->pledgeId    = $result['pledgeId'];
         $this->key         = $result['key'];
@@ -78,25 +93,8 @@ class PTPPledges
         $this->edited      = $result['edited'];
     }
 
-    private function get_pledge( $id )
-    {
-      global $wpdb;
-
-      $sql = "SELECT * FROM {$wpdb->prefix}ptp_pledges WHERE pledgeId = " . $id;
-      $sql .= " LIMIT 1";
-
-      $result = $wpdb->get_results( $sql, 'ARRAY_A' );
-
-      //only ever select 1 record so look at first entry
-      //echo print_r($result[0]);
-      return $result[0];
-    }
-
     public function update_entry($pledgeId, $key)
     {
-        global $wpdb;
-        $pledgeTable = $wpdb->prefix . "ptp_pledges";
-
         $data = array(
             'category'  => strip_tags($_POST["category"]),
             'fName'     => strip_tags($_POST["fName"]),
@@ -142,8 +140,8 @@ class PTPPledges
             $data['linkUrl3']  = strip_tags($_POST["linkUrl3"]);
         }
 
-        $wpdb->update(
-            $pledgeTable,
+        $this->wpdb->update(
+            $this->pledgeTable,
             $data,
             array(
                 'pledgeId' => $pledgeId,
@@ -152,6 +150,17 @@ class PTPPledges
         );
 
         return "<h1>Success! Entry " . $pledgeId . " was updated! Please refresh page to see latest data.</h1>";
+    }
+
+    private function getPledgeData($id)
+    {
+        $sql = "SELECT * FROM {$this->pledgeTable} WHERE pledgeId = " . $id;
+        $sql .= " LIMIT 1";
+
+        $result = $this->wpdb->get_results( $sql, 'ARRAY_A' );
+
+        //only ever select 1 record so look at first entry
+        return $result[0];
     }
 
 }
