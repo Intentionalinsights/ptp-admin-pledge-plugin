@@ -62,51 +62,51 @@ class PTPPledges
         $this->populatePledgeProperties($details);
     }
 
-    public function update_entry($pledgeId, $key)
+    public function updateEntry($pledgeId, $key, $updatedData)
     {
         $data = array(
-            'category'  => strip_tags($_POST["category"]),
-            'fName'     => strip_tags($_POST["fName"]),
-            'lName'     => strip_tags($_POST["lName"]),
-            'groupName' => strip_tags($_POST["groupName"]),
-            'email'     => strip_tags($_POST["email"]),
+            'category'  => strip_tags($updatedData["category"]),
+            'fName'     => strip_tags($updatedData["fName"]),
+            'lName'     => strip_tags($updatedData["lName"]),
+            'groupName' => strip_tags($updatedData["groupName"]),
+            'email'     => strip_tags($updatedData["email"]),
 
-            'show'        => isset($_POST['show']),
-            'volunteer'   => isset($_POST['volunteer']),
-            'directory'   => isset($_POST['directory']),
-            'emailList'   => isset($_POST['emailList']),
-            'emailAlerts' => isset($_POST['emailAlerts']),
-            'repNudge'    => isset($_POST['repNudge']),
+            'show'        => isset($updatedData['show']),
+            'volunteer'   => isset($updatedData['volunteer']),
+            'directory'   => isset($updatedData['directory']),
+            'emailList'   => isset($updatedData['emailList']),
+            'emailAlerts' => isset($updatedData['emailAlerts']),
+            'repNudge'    => isset($updatedData['repNudge']),
 
-            'address1'   => strip_tags($_POST["address1"]),
-            'address2'   => strip_tags($_POST["address2"]),
-            'city'       => strip_tags($_POST["city"]),
-            'region'     => strip_tags($_POST["region"]),
-            'zip'        => strip_tags($_POST["zip"]),
-            'country'    => strip_tags($_POST["country"]),
+            'address1'   => strip_tags($updatedData["address1"]),
+            'address2'   => strip_tags($updatedData["address2"]),
+            'city'       => strip_tags($updatedData["city"]),
+            'region'     => strip_tags($updatedData["region"]),
+            'zip'        => strip_tags($updatedData["zip"]),
+            'country'    => strip_tags($updatedData["country"]),
 
-            'phone'      => strip_tags($_POST["phone"]),
-            'textAlerts' => isset($_POST['textAlerts']),
+            'phone'      => strip_tags($updatedData["phone"]),
+            'textAlerts' => isset($updatedData['textAlerts']),
 
-            'orgs'       => strip_tags($_POST["orgs"]),
+            'orgs'       => strip_tags($updatedData["orgs"]),
 
-            'description' => strip_tags($_POST["description"]),
-            'imageUrl'    => strip_tags($_POST["imageUrl"]),
+            'description' => strip_tags($updatedData["description"]),
+            'imageUrl'    => strip_tags($updatedData["imageUrl"]),
         );
 
-        if (isset($_POST['linkText1']) && $_POST['linkUrl1'] != "https://www.facebook.com/") {
-            $data['linkText1'] = strip_tags($_POST["linkText1"]);
-            $data['linkUrl1']  = strip_tags($_POST["linkUrl1"]);
+        if (isset($updatedData['linkText1']) && $updatedData['linkUrl1'] != "https://www.facebook.com/") {
+            $data['linkText1'] = strip_tags($updatedData["linkText1"]);
+            $data['linkUrl1']  = strip_tags($updatedData["linkUrl1"]);
         }
 
-        if (isset($_POST['linkText2']) && $_POST['linkUrl2'] != "https://twitter.com/") {
-            $data['linkText2'] = strip_tags($_POST["linkText2"]);
-            $data['linkUrl2']  = strip_tags($_POST["linkUrl2"]);
+        if (isset($updatedData['linkText2']) && $updatedData['linkUrl2'] != "https://twitter.com/") {
+            $data['linkText2'] = strip_tags($updatedData["linkText2"]);
+            $data['linkUrl2']  = strip_tags($updatedData["linkUrl2"]);
         }
 
-        if (isset($_POST['linkText3']) && $_POST['linkUrl3'] != "http://") {
-            $data['linkText3'] = strip_tags($_POST["linkText3"]);
-            $data['linkUrl3']  = strip_tags($_POST["linkUrl3"]);
+        if (isset($updatedData['linkText3']) && $updatedData['linkUrl3'] != "http://") {
+            $data['linkText3'] = strip_tags($updatedData["linkText3"]);
+            $data['linkUrl3']  = strip_tags($updatedData["linkUrl3"]);
         }
 
         $this->wpdb->update(
@@ -126,10 +126,10 @@ class PTPPledges
 
     private function getPledgeData($id)
     {
-        $sql = "SELECT * FROM {$this->pledgeTable} WHERE pledgeId = " . $id;
+        $sql  = "SELECT * FROM {$this->pledgeTable} WHERE pledgeId = " . $id;
         $sql .= " LIMIT 1";
 
-        $result = $this->wpdb->get_results( $sql, 'ARRAY_A' );
+        $result = $this->wpdb->get_results($sql, 'ARRAY_A');
 
         //only ever select 1 record so look at first entry
         return $result[0];
@@ -175,16 +175,20 @@ class PTPPledges
 $pledgeId = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['pledgers_edit']);
 
 if (isset($_GET['pledgers_edit'])) {
-    echo '<h1>Editing pledge data for id: ' . $pledgeId . '</h1>';
     $pledger_data = new PTPPledges($pledgeId);
+
+    echo '<h1>Editing pledge data for id: ' . $pledgeId . '</h1>';
     echo '<h2>Last update time: ' . $pledger_data->edited . '</h2>';
+
 } else {
+
     echo '<h1>Please use the PTP Manage table list view to access a record to edit.</h1>';
+
 }
 
 //check if form was submitted
 if (isset($_POST['SubmitButton'])) {
-    $message = $pledger_data->update_entry($pledger_data->pledgeId, $pledger_data->key);
+    $message = $pledger_data->updateEntry($pledger_data->pledgeId, $pledger_data->key, $_POST);
 }
 
 ?>
