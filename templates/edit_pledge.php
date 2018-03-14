@@ -58,39 +58,8 @@ class PTPPledges
         $this->wpdb        = $wpdb;
         $this->pledgeTable = $wpdb->prefix . 'ptp_pledges';
 
-        $result = $this->getPledgeData($id);
-
-        $this->pledgeId    = $result['pledgeId'];
-        $this->key         = $result['key'];
-        $this->show        = $result['show'];
-        $this->category    = $result['category'];
-        $this->fName       = $result['fName'];
-        $this->lName       = $result['lName'];
-        $this->groupName   = $result['groupName'];
-        $this->email       = $result['email'];
-        $this->volunteer   = $result['volunteer'];
-        $this->emailList   = $result['emailList'];
-        $this->directory   = $result['directory'];
-        $this->emailAlerts = $result['emailAlerts'];
-        $this->textAlerts  = $result['textAlerts'];
-        $this->repNudge    = $result['repNudge'];
-        $this->address1    = $result['address1'];
-        $this->address2    = $result['address2'];
-        $this->city        = $result['city'];
-        $this->region      = $result['region'];
-        $this->zip         = $result['zip'];
-        $this->country     = $result['country'];
-        $this->orgs        = $result['orgs'];
-        $this->phone       = $result['phone'];
-        $this->description = $result['description'];
-        $this->imageUrl    = $result['imageUrl'];
-        $this->linkText1   = $result['linkText1'];
-        $this->linkUrl1    = $result['linkUrl1'];
-        $this->linkText2   = $result['linkText2'];
-        $this->linkUrl2    = $result['linkUrl2'];
-        $this->linkText3   = $result['linkText3'];
-        $this->linkUrl3    = $result['linkUrl3'];
-        $this->edited      = $result['edited'];
+        $details = $this->getPledgeData($id);
+        $this->populatePledgeProperties($details);
     }
 
     public function update_entry($pledgeId, $key)
@@ -149,7 +118,10 @@ class PTPPledges
             )
         );
 
-        return "<h1>Success! Entry " . $pledgeId . " was updated! Please refresh page to see latest data.</h1>";
+        $updatedDetails = $this->getPledgeData($pledgeId);
+        $this->populatePledgeProperties($updatedDetails);
+
+        return "<h1>Success! Entry " . $pledgeId . " was updated!</h1>";
     }
 
     private function getPledgeData($id)
@@ -161,6 +133,41 @@ class PTPPledges
 
         //only ever select 1 record so look at first entry
         return $result[0];
+    }
+
+    private function populatePledgeProperties($details)
+    {
+        $this->pledgeId    = $details['pledgeId'];
+        $this->key         = $details['key'];
+        $this->show        = $details['show'];
+        $this->category    = $details['category'];
+        $this->fName       = $details['fName'];
+        $this->lName       = $details['lName'];
+        $this->groupName   = $details['groupName'];
+        $this->email       = $details['email'];
+        $this->volunteer   = $details['volunteer'];
+        $this->emailList   = $details['emailList'];
+        $this->directory   = $details['directory'];
+        $this->emailAlerts = $details['emailAlerts'];
+        $this->textAlerts  = $details['textAlerts'];
+        $this->repNudge    = $details['repNudge'];
+        $this->address1    = $details['address1'];
+        $this->address2    = $details['address2'];
+        $this->city        = $details['city'];
+        $this->region      = $details['region'];
+        $this->zip         = $details['zip'];
+        $this->country     = $details['country'];
+        $this->orgs        = $details['orgs'];
+        $this->phone       = $details['phone'];
+        $this->description = $details['description'];
+        $this->imageUrl    = $details['imageUrl'];
+        $this->linkText1   = $details['linkText1'];
+        $this->linkUrl1    = $details['linkUrl1'];
+        $this->linkText2   = $details['linkText2'];
+        $this->linkUrl2    = $details['linkUrl2'];
+        $this->linkText3   = $details['linkText3'];
+        $this->linkUrl3    = $details['linkUrl3'];
+        $this->edited      = $details['edited'];
     }
 
 }
