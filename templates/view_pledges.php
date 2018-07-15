@@ -71,8 +71,6 @@ class Pledgers_List_Table extends WP_List_Table {
     public static function delete_pledger( $id ) {
       global $wpdb;
 
-      echo '<h1>Deleted record: ' . $id . '</h1>';
-
       $wpdb->delete(
         "{$wpdb->prefix}ptp_pledges",
         [ 'pledgeId' => $id ],
@@ -268,7 +266,10 @@ class Pledgers_List_Table extends WP_List_Table {
       $this->process_bulk_action();
 
       $per_page     = $this->get_items_per_page( 'pledgers_per_page', $this->NUMBER_OF_RECORDS_DEFAULT );
-      $current_page = $this->get_pagenum();
+      if (!empty($_GET["per_page"])) {
+		  $per_page = $_GET["per_page"];
+	  }
+	  $current_page = $this->get_pagenum();
       $total_items  = self::record_count();
 
       $this->set_pagination_args( [
@@ -285,7 +286,7 @@ class Pledgers_List_Table extends WP_List_Table {
         //Detect when a bulk action is being triggered...
         if( 'delete'===$this->current_action() ) {
             $this->delete_pledger($_GET["pledgers_delete"]);
-            echo '<h1>Deleted item ' .$_GET["pledgers_delete"]. '</h1>';
+            echo '<h1>Deleted-item ' .$_GET["pledgers_delete"]. '</h1>'."{{" . $wpdb->last_error. "}}".'*';
         }
         else if( 'edit'===$this->current_action() ) {
             echo '<h1>Enable editing of item '. $_GET["pledgers_edit"]. '</h1>';
@@ -302,24 +303,33 @@ $pledgers_table->handle_custom_action();
 
     <div id="poststuff">
 
-      <form method="post">
+      <form method="get">
         <div class="row">
-              <div class="form-group col-sm-6" >
+              <div class="form-group col-sm-5" >
                   <label for="fNameFilter">First Name</label>
                   <input type="text" name="fNameFilter" id="fNameFilter" class="form-control" autocomplete="fname" 
                   value="<?php echo htmlspecialchars($_REQUEST['fNameFilter']); ?>" 
                   />
               </div>
-              <div class="form-group col-sm-6" >
+              <div class="form-group col-sm-5" >
                   <label for="lNameFilter">Last Name</label>
                   <input type="text" name="lNameFilter" id="lNameFilter" class="form-control" autocomplete="lname"
                   value="<?php echo htmlspecialchars($_REQUEST['lNameFilter']); ?>" 
                   />
               </div>
+              <div class="form-group col-sm-2" >
+                  <label for="per_page">rows</label>
+                  <input type="text" name="per_page" id="per_page" class="form-control" 
+                  value="<?php echo htmlspecialchars($_REQUEST['per_page']); ?>" 
+                  />
+              </div>
         </div>
         <div class="row">
               <div class="form-group col-sm-12">
-                  <input type="submit" name="SubmitButton" class="btn btn-primary" value="Search"/>
+                  <input type="hidden" name="page" id="page"  
+                  value="<?php echo htmlspecialchars($_REQUEST['page']); ?>" />
+                  <input type="submit" class="btn btn-primary" value="Search"/>
+
               </div>
           </div>
       </form>
