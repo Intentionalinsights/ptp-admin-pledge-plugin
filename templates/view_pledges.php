@@ -96,7 +96,7 @@ class Pledgers_List_Table extends WP_List_Table {
      * Returns an associative array containing the bulk action
      *
      * @return array
-     
+
     public function get_bulk_actions() {
       $actions = [
         // 'bulk-edit' => 'Edit',
@@ -130,15 +130,15 @@ class Pledgers_List_Table extends WP_List_Table {
     /** ************************************************************************
      * Recommended. This is a custom column method and is responsible for what
      * is rendered in any column with a name/slug of 'title'. Every time the class
-     * needs to render a column, it first looks for a method named 
+     * needs to render a column, it first looks for a method named
      * column_{$column_title} - if it exists, that method is run. If it doesn't
      * exist, column_default() is called instead.
-     * 
+     *
      * This example also illustrates how to implement rollover actions. Actions
      * should be an associative array formatted as 'slug'=>'link html' - and you
      * will need to generate the URLs yourself. You could even ensure the links
-     * 
-     * 
+     *
+     *
      * @see WP_List_Table::::single_row_columns()
      * @param array $item A singular item (one full row's worth of data)
      * @return string Text to be placed inside the column <td> (movie title only)
@@ -183,6 +183,7 @@ class Pledgers_List_Table extends WP_List_Table {
             //'cb'        => '<input type="checkbox" />', //* Disabled:  BULK ITEMS MANAGEMENT FOR THE FUTURE
             'pledgeId' => 'PledgeId',
             'show' => 'Show',
+            'prominent' => 'Prominent',
             'category' => 'Category',
             'step' => 'Step',
             'fName' => 'FName',
@@ -255,7 +256,7 @@ class Pledgers_List_Table extends WP_List_Table {
 
 
       /**
-        * REQUIRED. Finally, we build an array to be used by the class for column 
+        * REQUIRED. Finally, we build an array to be used by the class for column
         * headers. The $this->_column_headers property takes an array which contains
         * 3 other arrays. One for all columns, one for hidden columns, and one
         * for sortable columns.
@@ -307,26 +308,26 @@ $pledgers_table->handle_custom_action();
         <div class="row">
               <div class="form-group col-sm-5" >
                   <label for="fNameFilter">First Name</label>
-                  <input type="text" name="fNameFilter" id="fNameFilter" class="form-control" autocomplete="fname" 
-                  value="<?php echo htmlspecialchars($_REQUEST['fNameFilter']); ?>" 
+                  <input type="text" name="fNameFilter" id="fNameFilter" class="form-control" autocomplete="fname"
+                  value="<?php echo htmlspecialchars($_REQUEST['fNameFilter']); ?>"
                   />
               </div>
               <div class="form-group col-sm-5" >
                   <label for="lNameFilter">Last Name</label>
                   <input type="text" name="lNameFilter" id="lNameFilter" class="form-control" autocomplete="lname"
-                  value="<?php echo htmlspecialchars($_REQUEST['lNameFilter']); ?>" 
+                  value="<?php echo htmlspecialchars($_REQUEST['lNameFilter']); ?>"
                   />
               </div>
               <div class="form-group col-sm-2" >
                   <label for="per_page">rows</label>
-                  <input type="text" name="per_page" id="per_page" class="form-control" 
-                  value="<?php echo htmlspecialchars($_REQUEST['per_page']); ?>" 
+                  <input type="text" name="per_page" id="per_page" class="form-control"
+                  value="<?php echo htmlspecialchars($_REQUEST['per_page']); ?>"
                   />
               </div>
         </div>
         <div class="row">
               <div class="form-group col-sm-12">
-                  <input type="hidden" name="page" id="page"  
+                  <input type="hidden" name="page" id="page"
                   value="<?php echo htmlspecialchars($_REQUEST['page']); ?>" />
                   <input type="submit" class="btn btn-primary" value="Search"/>
 
@@ -340,7 +341,7 @@ $pledgers_table->handle_custom_action();
                   <form method="post">
                       <?php
                       $pledgers_table->prepare_items();
-                      $pledgers_table->display(); 
+                      $pledgers_table->display();
                       ?>
                   </form>
               </div>
