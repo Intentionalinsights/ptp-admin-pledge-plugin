@@ -199,13 +199,23 @@ if (isset($_POST['SubmitButton'])) {
     <form action="" method="post">
     <?php echo $message; ?>
 
-        <div class="form-group">
-            <div class="form-check form-check-inline">
-                <label for="prominent">
-                    <input type="checkbox" name="prominent" id="prominent" value="1" <?php echo ($pledger_data->prominent) ? "checked" : ""; ?> >
-                    Prominent Pledge Taker
-                </label>
-                (Pledge taker will be displayed with special emphasis on the public figures page)
+        <div class="row" style="border-left: 2px solid #999; padding-left: 15px; padding-top: 15px;">
+            <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="show">
+                        <input class="form-check-input" type="checkbox" name="show" id="show" value="show" <?php echo ($pledger_data->show == 1) ? 'checked': ''; ?> />
+                        Show this record to the public
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <label for="prominent">
+                        <input type="checkbox" name="prominent" id="prominent" value="1" <?php echo ($pledger_data->prominent) ? "checked" : ""; ?> >
+                        Prominent Pledge Taker
+                    </label>
+                    (Pledge taker will be displayed with special emphasis on the public figures page)
+                </div>
             </div>
         </div>
 
@@ -227,18 +237,12 @@ if (isset($_POST['SubmitButton'])) {
             </div>
         </div>
 
-		<div class="row">
+        <div class="row">
             <div class="form-group col-sm-6" >
                 <label for="groupName">Group Name</label>
                 <input type="text" name="groupName" id="groupName" class="form-control" autocomplete="groupName"
                 value="<?php echo htmlspecialchars($pledger_data->groupName); ?>"
                 />
-            </div>
-            <div class="form-check form-check-inline col-sm-6">
-                <label class="form-check-label" style="display: inline;" for="show">
-                    Show this record to the public.
-                </label>
-                <input style="display:block;" class="form-check-input" type="checkbox" name="show" id="show" value="show" <?php echo ($pledger_data->show == 1) ? 'checked': ''; ?> />
             </div>
         </div>
 
